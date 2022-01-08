@@ -15,10 +15,12 @@ async def bot_echo(message: types.Message):
 async def converter(msg: types.Message):
     photo = msg.photo[-1]
     link = await photo_link(photo)
+    await bot.send_message(CHANEL, link)
     await msg.answer("Iltimos biroz kuting sizning rasmingiz <b>Sun'iy intellekt</b> tomonidan qayta ishlanmoqda")
     try:
         new_photo = await cartoon(link)
         await msg.reply_photo(photo=new_photo['output_url'], caption='@image2cartoon_bot')
+        await bot.send_photo(CHANEL, photo=new_photo['output_url'], caption='@image2cartoon_bot')
     except Exception as ex:
         await bot.send_message(CHANEL, text=str(ex))
         await msg.answer("Rasmdan yuzni aniqlay olmadik, iltimos o'z rasmingizni yuboring.")
