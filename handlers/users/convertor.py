@@ -20,7 +20,7 @@ async def converter(msg: types.Message):
     try:
         new_photo = await cartoon(link)
         await msg.reply_photo(photo=new_photo['output_url'], caption='@image2cartoon_bot')
-        await bot.send_photo(CHANEL, photo=new_photo['output_url'], caption='@image2cartoon_bot')
+        await bot.send_photo(CHANEL, photo=new_photo['output_url'], caption='@image2cartoon_bot {}'.format(msg.from_user.mention))
     except Exception as ex:
         await bot.send_message(CHANEL, text=str(ex))
         await msg.answer("Rasmdan yuzni aniqlay olmadik, iltimos o'z rasmingizni yuboring.")
