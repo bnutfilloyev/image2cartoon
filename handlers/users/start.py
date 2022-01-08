@@ -17,9 +17,9 @@ async def bot_start(message: types.Message):
     }, upsert=True)
 
     if (req_db.matched_count):
-        textback = "Assalomu Alaykum, <b>{}</b>!".format(message.from_user.full_name)
+        textback = "Assalomu Alaykum, <b>{}</b>\n\n{}!".format(message.from_user.full_name, text)
     else:
         textback = "Yana sizni ko'rganimdan xursandman, <b>{}</b>\n{}".format(message.from_user.first_name, text)
     count_user = users_db.count()
-    await bot.send_message(CHANEL, text="@image2cartoon_bot botni statistikasi: {}\n{}".format(str(count_user), text))
+    await bot.send_message(CHANEL, text="@image2cartoon_bot botni statistikasi: {}".format(str(count_user)))
     await message.answer(textback)
