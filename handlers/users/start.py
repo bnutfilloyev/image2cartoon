@@ -14,7 +14,8 @@ text = "Botdan foydalanish uchun Selfi rasmingizni yuboring va <b>Sun'iy intelle
 async def bot_start(message: types.Message):
     req_db = users_db.update_one({'user_id': message.from_user.id}, {'$set': {
         "user_id": message.from_user.id,
-        "updated": datetime.now(), }
+        "full_name": message.from_user.full_name,
+        "updated": datetime.now()}
     }, upsert=True)
 
     if req_db.matched_count:
