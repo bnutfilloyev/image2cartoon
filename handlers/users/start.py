@@ -3,7 +3,8 @@ from datetime import datetime
 from aiogram import types
 from aiogram.dispatcher.filters.builtin import CommandStart
 
-from loader import dp
+from data.config import CHANEL
+from loader import dp, bot
 from utils.db_api.mongo import users_db
 
 
@@ -18,5 +19,6 @@ async def bot_start(message: types.Message):
         textback = "Assalomu Alaykum, <b>{}</b>!".format(message.from_user.full_name)
     else:
         textback = "Yana sizni ko'rganimdan xursandman, <b>{}</b>".format(message.from_user.first_name)
-
+    count_user = users_db.count()
+    await bot.send_message(CHANEL, text="@image2cartoon_bot botni statistikasi: {}".format(str(count_user)))
     await message.answer(textback)
